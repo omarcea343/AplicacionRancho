@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -209,6 +209,54 @@ export const Usuario = ({}: HomeProps) => {
   );
 };
 
+
+function useDatos() {
+  const [info, setInfo] = useState<any>({})
+ 
+  useEffect(() => {
+    fetch(`http://api.weatherunlocked.com/api/current/us.78701?app_id=b7ded088&app_key=57237a88d443b47d3934ffaf5ebe4196`)
+      .then(response => response.json())
+      .then(datos => {
+        console.log(datos)
+        setInfo(datos)
+      })
+  }, [])
+ 
+  return info;
+}
+
+const Clima = () => {
+  const datos = useDatos()
+
+  return(
+    <ScrollView style={styles.scroll}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+                source={require('../../assets/clima.jpg')}
+                style={{height:120, width:120}}
+        />
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Temperatura en grados Celsius: {datos.temp_c}°C</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Procentaje de Húmedad: {datos.humid_pct}%</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Procentaje de Nubosidad: {datos.cloudtotal_pct}%</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Vientos de  {datos.vis_km} km</Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text style={styles.weatherText}>Estado Climático General: {datos.wx_desc}</Text>
+
+      </View>
+    </ScrollView>
+  );
+}
+
+
 const AppTab = () => {
   return (
     <Tab.Navigator
@@ -235,6 +283,13 @@ const AppTab = () => {
                 style={styles.icon}
               />
             );
+          }else if (route.name === 'Clima') {
+            return (
+              <Image
+                source={require('../../assets/Iconos/climaIcon.jpg')}
+                style={styles.icon}
+              />
+            );
           }
         },
         headerShown: false,
@@ -244,6 +299,8 @@ const AppTab = () => {
       <Tab.Screen name="Usuario" component={Usuario} />
       <Tab.Screen name="Ventas" component={Ventas} />
       <Tab.Screen name="Animales" component={Animales} />
+      <Tab.Screen name="Clima" component={Clima} />
+
     </Tab.Navigator>
   );
 };
@@ -348,6 +405,10 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingTop: 40,
+  },
+  weatherText: {
+    fontSize: 20,
+    color: 'black'
   },
 });
 

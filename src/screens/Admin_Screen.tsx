@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import {
 } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Row, Table } from 'react-native-table-component';
 
 /*
 const AlimentarAnimal = require('./assets/secciones/alimentar.png');
@@ -499,6 +500,69 @@ const Reportes = () => {
         />
       </TouchableOpacity>
       <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte6' as never)}>
+        <Image
+          source={require('../../assets/secciones/Reporte6.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte7' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte7.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte8' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte8.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte9' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte9.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte10' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte10.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte11' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte11.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Reporte12' as never)}>
+        <Image
+          source={require('../../assets/secciones/reporte12.jpg')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <Text> </Text>
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
@@ -506,6 +570,52 @@ const Reportes = () => {
   </ScrollView>
   );
 };
+
+function useDatos() {
+  const [info, setInfo] = useState<any>({})
+ 
+  useEffect(() => {
+    fetch(`http://api.weatherunlocked.com/api/current/us.78701?app_id=b7ded088&app_key=57237a88d443b47d3934ffaf5ebe4196`)
+      .then(response => response.json())
+      .then(datos => {
+        console.log(datos)
+        setInfo(datos)
+      })
+  }, [])
+ 
+  return info;
+}
+
+const Clima = () => {
+  const datos = useDatos()
+
+  return(
+    <ScrollView style={styles.scroll}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+                source={require('../../assets/clima.jpg')}
+                style={{height:120, width:120}}
+        />
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Temperatura en grados Celsius: {datos.temp_c}°C</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Procentaje de Húmedad: {datos.humid_pct}%</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Procentaje de Nubosidad: {datos.cloudtotal_pct}%</Text>
+        <Text> </Text> 
+        <Text> </Text>
+        <Text style={styles.weatherText}>Vientos de  {datos.vis_km} km</Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text style={styles.weatherText}>Estado Climático General: {datos.wx_desc}</Text>
+
+      </View>
+    </ScrollView>
+  );
+}
 
 const AppTab = () => {
   return (
@@ -554,6 +664,13 @@ const AppTab = () => {
                 style={styles.icon}
               />
             );
+          }else if (route.name === 'Clima') {
+            return (
+              <Image
+                source={require('../../assets/Iconos/climaIcon.jpg')}
+                style={styles.icon}
+              />
+            );
           }
         },
         headerShown: false,
@@ -566,6 +683,7 @@ const AppTab = () => {
       <Tab.Screen name="Eliminar" component={Eliminar} />
       <Tab.Screen name="Actualizar" component={Actualizar} />
       <Tab.Screen name="Reportes" component={Reportes} />
+      <Tab.Screen name="Clima" component={Clima} />
 
 
     </Tab.Navigator>
@@ -672,6 +790,10 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingTop: 40,
+  },
+  weatherText: {
+    fontSize: 20,
+    color: 'black'
   },
 });
 
