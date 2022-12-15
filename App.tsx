@@ -59,6 +59,13 @@ import ConsultarReporte4 from './src/screens/Reporte4_Screen';
 import ConsultarReporte5 from './src/screens/Reporte5_Screen';
 import ConsProveedorAdminInic from './src/screens/ConsProveedor_Screen';
 import ConsultarProveedorCompleto from './src/screens/ConsultaCompletaProveedor_Screen';
+import ConsultarReporte6 from './src/screens/Reporte6_Screen';
+import ConsultarReporte7 from './src/screens/Reporte7_Screen';
+import ConsultarReporte8 from './src/screens/Reporte8_Screen';
+import ConsultarReporte9 from './src/screens/Reporte9_Screen';
+import ConsultarReporte10 from './src/screens/Reporte10_Screen';
+import ConsultarReporte11 from './src/screens/Reporte11_Screen';
+import ConsultarReporte12 from './src/screens/Reporte12_Screen';
 
 const Stack = createStackNavigator();
 
@@ -123,7 +130,14 @@ const App = () => {
                 <Stack.Screen name='Reporte2' component={ConsultarReporte2}/> 
                 <Stack.Screen name='Reporte3' component={ConsultarReporte3}/> 
                 <Stack.Screen name='Reporte4' component={ConsultarReporte4}/> 
-                <Stack.Screen name='Reporte5' component={ConsultarReporte5}/> 
+                <Stack.Screen name='Reporte5' component={ConsultarReporte5}/>
+                <Stack.Screen name='Reporte6' component={ConsultarReporte6}/> 
+                <Stack.Screen name='Reporte7' component={ConsultarReporte7}/> 
+                <Stack.Screen name='Reporte8' component={ConsultarReporte8}/> 
+                <Stack.Screen name='Reporte9' component={ConsultarReporte9}/> 
+                <Stack.Screen name='Reporte10' component={ConsultarReporte10}/> 
+                <Stack.Screen name='Reporte11' component={ConsultarReporte11}/> 
+                <Stack.Screen name='Reporte12' component={ConsultarReporte12}/> 
                 <Stack.Screen name='ConsProvId' component={ConsProveedorAdminInic}/> 
                 <Stack.Screen name='ConsProvComp' component={ConsultarProveedorCompleto}/> 
 
